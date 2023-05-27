@@ -1,8 +1,34 @@
-import { FlatList, SafeAreaView, StyleSheet, Text, View } from "react-native";
+import {
+  Button,
+  FlatList,
+  Image,
+  Pressable,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { tweets } from "../../data/tweets";
 import Tweet from "../../components/Tweet";
+import { useNavigation } from "@react-navigation/native";
+import { useLayoutEffect } from "react";
 
 export default function Feed() {
+  const navigation = useNavigation();
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerLeft: () => (
+        <Pressable onPress={() => navigation.openDrawer()}>
+          <Image
+            source={require("../../assets/beto.jpeg")}
+            style={{ width: 40, height: 40, borderRadius: 100, marginLeft: 15 }}
+          />
+        </Pressable>
+      ),
+    });
+  }, []);
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <FlatList
@@ -13,11 +39,11 @@ export default function Feed() {
         renderItem={({ item }) => {
           return <Tweet tweet={item} />;
         }}
-        ListHeaderComponent={() => (
-          <View style={styles.header}>
-            <Text style={styles.headerTitle}>New tweets available</Text>
-          </View>
-        )}
+        // ListHeaderComponent={() => (
+        //   <View style={styles.header}>
+        //     <Text style={styles.headerTitle}>New tweets available</Text>
+        //   </View>
+        // )}
         ListHeaderComponentStyle={{ backgroundColor: "#ccc" }}
         ItemSeparatorComponent={() => <View style={styles.divider} />}
       />
