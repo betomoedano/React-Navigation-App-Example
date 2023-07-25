@@ -18,7 +18,7 @@ WebBrowser.maybeCompleteAuthSession();
 export default function App() {
   const [userInfo, setUserInfo] = React.useState();
   const [loading, setLoading] = React.useState(false);
-  const [request, response, promptAsync] = Google.useAuthRequest({
+  const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
     iosClientId: "",
     androidClientId: "",
   });
